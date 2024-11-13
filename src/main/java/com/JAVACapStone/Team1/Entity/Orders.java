@@ -4,10 +4,7 @@ import com.JAVACapStone.Team1.Enums.DeliveryStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -22,18 +19,36 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
+    @Column(nullable = false)
     long timestamp;
+
+    @Column(nullable = false)
     float totalAmountPaid;
-    float deliveryCharge;
-    float amountSaved;
-    float orderedLocationLatitute;
+
+    float deliveryCharge;      //do we need Float(wrapper class) as it can be null
+
+    float amountSaved;        //do we need Float(wrapper class) as it can be null
+
+    @Column(nullable = false)
+    float orderedLocationLatitude;
+
+    @Column(nullable = false)
     float orderedLocationLongitude;
+
+    @Column(nullable = false)
     String contactNumber;
+
     @Enumerated(EnumType.STRING)
     DeliveryStatus deliveryStatus;
 
-    @OneToMany
-    List<OrderItem> orderItemList;
+    @ManyToOne
+    @JoinColumn
+    User user;
+
+    @ManyToOne
+    @JoinColumn
+    AddressBook addressBook;
+
 
 
 

@@ -15,13 +15,24 @@ public class AddressBook {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int addressId;
-    float latitute;
+    long id;
+
+    @Column(nullable = false)
+    float latitude;
+
+    @Column(nullable = false)
     float longitude;
+
     @Column(nullable = false)
     String addressLine1;
+
     String addressLine2;
+
     String addressLine3;
+
+    @ManyToOne
+    @JoinColumn
+    User user;
 
 
 }

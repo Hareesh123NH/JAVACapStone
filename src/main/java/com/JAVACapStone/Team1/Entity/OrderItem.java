@@ -1,8 +1,6 @@
 package com.JAVACapStone.Team1.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -15,9 +13,23 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderItem {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    long id;
 
-
+    @Column(nullable = false)
     int quantity;
+
+    @Column(nullable = false)
     float amountPaid;
-    float discount;
+
+    float discount;       //do we need Float(wrapper class) as it can be null
+
+    @ManyToOne
+    @JoinColumn
+    Orders orders;
+
+    //@ManyToOne
+    //@JoinColumn
+    //Product product
 }
