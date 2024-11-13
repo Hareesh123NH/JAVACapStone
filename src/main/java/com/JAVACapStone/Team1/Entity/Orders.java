@@ -1,42 +1,42 @@
 package com.JAVACapStone.Team1.Entity;
 
+import com.JAVACapStone.Team1.Enums.DeliveryStatus;
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
-
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-//    Table Orders {
-//
-//        order_id int [primary key]
-//
-//        timestamp long // epoch time
-//
-//        delivery_status enum
-//
-//        address_id int
-//
-//        user_id int
-//
-//        total_amount_paid float
-//
-//        delivery_charge float
-//
-//        amount_saved float
-//
-//        ordered_location_lat float
-//
-//        ordered_location_lng float
-//
-//        contact_number string
-//
-//    }
-    @CreationTimestamp
-    long timeStamp;
+
+    long timestamp;
+    float totalAmountPaid;
+    float deliveryCharge;
+    float amountSaved;
+    float orderedLocationLatitute;
+    float orderedLocationLongitude;
+    String contactNumber;
+    @Enumerated(EnumType.STRING)
+    DeliveryStatus deliveryStatus;
+
+    @OneToMany
+    List<OrderItem> orderItemList;
+
+
+
+
 
 }

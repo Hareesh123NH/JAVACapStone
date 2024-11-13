@@ -1,26 +1,32 @@
 package com.JAVACapStone.Team1.Entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name="users")
+@Data
+@FieldDefaults(level =  AccessLevel.PRIVATE)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    long id;
 
     @Column(nullable = false)
-    private String name;
+    String name;
 
-    private String password;
+    String password;
 
     @Column(unique = true)
-    private String email;
+    String email;
 
     @Column(nullable = false,unique =true)
-    private String mobileNumber;
-
+    String mobileNumber;
 
 
 }
