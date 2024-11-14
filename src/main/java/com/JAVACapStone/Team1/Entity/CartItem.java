@@ -6,7 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Table(name = "cart_item")
+@Table(name = "cart_items")
 @Data
 @Builder
 @AllArgsConstructor
@@ -15,16 +15,18 @@ import lombok.experimental.FieldDefaults;
 public class CartItem {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    int id;
 
-    Integer quantity; //if quantity goes below 0, we will delete right. then do we need wrapper cls here
+    @Column(name = "quantity")
+    Integer quantity;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "user_id", nullable = false)
     User user;
 
 //    @ManyToOne
-//    @JoinColumn
+//    @JoinColumn(name = "product_id", nullable = false)
 //    Product product
 }

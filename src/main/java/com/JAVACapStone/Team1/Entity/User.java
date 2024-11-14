@@ -5,7 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,18 +14,20 @@ import lombok.experimental.FieldDefaults;
 public class User {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    int id;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     String name;
 
+    @Column(name = "password", nullable = false)
     String password;
 
-    @Column(unique = true)
+    @Column(name = "email", unique = true)
     String email;
 
-    @Column(nullable = false,unique =true)
+    @Column(name = "mobile_number", nullable = false, unique =true, length = 10)
     String mobileNumber;
 
 

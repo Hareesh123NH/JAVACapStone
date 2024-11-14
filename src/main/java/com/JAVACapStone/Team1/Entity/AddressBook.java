@@ -14,24 +14,27 @@ import lombok.experimental.FieldDefaults;
 public class AddressBook {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    int id;
 
-    @Column(nullable = false)
+    @Column(name = "latitude", nullable = false)
     float latitude;
 
-    @Column(nullable = false)
+    @Column(name = "longitude", nullable = false)
     float longitude;
 
-    @Column(nullable = false)
+    @Column(name = "address_line_1", nullable = false)
     String addressLine1;
 
+    @Column(name = "address_line_2")
     String addressLine2;
 
+    @Column(name = "address_line_3")
     String addressLine3;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "user_id", nullable = false)
     User user;
 
 

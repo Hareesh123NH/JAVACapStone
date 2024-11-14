@@ -5,7 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Table(name = "order_item")
+@Table(name = "order_items")
 @Data
 @Builder
 @AllArgsConstructor
@@ -13,23 +13,25 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderItem {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    long id;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
 
-    @Column(nullable = false)
+    @Column(name = "quantity", nullable = false)
     int quantity;
 
-    @Column(nullable = false)
+    @Column(name = "amount_paid", nullable = false)
     float amountPaid;
 
-    float discount;       //do we need Float(wrapper class) as it can be null
+    @Column(name = "discount")
+    Float discount;
 
     @ManyToOne
-    @JoinColumn
-    Orders orders;
+    @JoinColumn(name = "order_id", nullable = false)
+    Order order;
 
     //@ManyToOne
-    //@JoinColumn
+    //@JoinColumn(name = "product_id", nullable = false)
     //Product product
 }
