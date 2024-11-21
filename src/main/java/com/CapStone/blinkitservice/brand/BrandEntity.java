@@ -11,14 +11,13 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BrandEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     Integer id;
 
     String logo;
