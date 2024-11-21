@@ -23,7 +23,7 @@ public class OrderItemEntity {
     int quantity;
 
     @Column(name = "amount_paid", nullable = false)
-    float amountPaid;
+    Float amountPaid;
 
     @Column(name = "discount")
     Float discount;
