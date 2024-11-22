@@ -22,10 +22,10 @@ public class AuthService {
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
-    public String authenticate(String email, String password) {
-        UserEntity user = userRepository.findByEmail(email);
+    public String authenticate(AuthRequest authRequest) {
+        UserEntity user = userRepository.findByEmail(authRequest.getEmail());
 
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+        if (user != null && passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
             String token = jwtManager.generateToken(user.getEmail());
             return token;
         }
@@ -34,8 +34,10 @@ public class AuthService {
     }
 
     public UserResponse signup(UserRequest userRequest) {
+
         UserEntity user = UserTransformer.userRequestToUser(userRequest);
         UserEntity savedUser = userRepository.save(user);
         return UserTransformer.userToUserResponse(savedUser);
+
     }
 }

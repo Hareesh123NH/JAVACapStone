@@ -11,16 +11,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
     AuthService authService;
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String email, @RequestParam String password) {
+    @PostMapping("/signin")
+    public ResponseEntity<String> signIn(@RequestBody AuthRequest authRequest) {
 
-        String response = authService.authenticate(email, password);
+        String response = authService.authenticate(authRequest);
 
         if (response == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
@@ -35,7 +35,7 @@ public class AuthController {
         try{
             UserResponse response = authService.signup(userRequest);
             Map<String,String> res=new HashMap<>();
-            res.put("message","SuccessFully SignUp");
+            res.put("message","SuccessFully Signed Up");
             res.put("response",response.toString());
             return new ResponseEntity<>(res, HttpStatus.CREATED);
 
